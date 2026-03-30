@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEYOND SKIN - Redefining Beauty Through Wellness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-accent: #C9A882;
+            --color-accent-light: rgba(201, 168, 130, 0.10);
+            --color-bg: #FAF8F5;
+            --color-bg-warm: #F5EDE4;
+            --color-text-dark: #111827;
+            --color-text-gray: #4B5563;
+            --color-text-light: #374151;
+            --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scroll Animation Base States */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 15px 80px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            width: 69px;
+            height: 69px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 27px;
+            color: white;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav.scrolled .nav-logo span {
+            color: var(--color-text-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 41px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-size: 20px;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--color-accent);
+            color: white;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: 400;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 1200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('beyond skin elements/beyond skin home picture.png');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+            transition: transform 0.5s ease-out;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.25) 100%);
+            opacity: 0.65;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1920px;
+            padding: 0 104px;
+            margin-top: 200px;
+        }
+
+        .hero-text {
+            max-width: 1248px;
+        }
+
+        .hero h1 {
+            font-size: 100px;
+            line-height: 96px;
+            color: white;
+            font-weight: 400;
+            margin-bottom: 32px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 25px;
+            line-height: 28px;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 672px;
+            margin-bottom: 64px;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+            max-width: 1248px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 9999px;
+            font-size: 20px;
+            font-weight: 400;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            display: inline-block;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--color-text-dark);
+            box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--color-text-dark);
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            color: white;
+            box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline-accent {
+            background: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+
+        .btn-outline-accent:hover {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Spacing */
+        section {
+            width: 100%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Pain Point Section */
+        .pain-point {
+            padding: 128px 0;
+            background: var(--color-bg);
+        }
+
+        .pain-point-content {
+            max-width: 896px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .pain-point h2 {
+            font-size: 59.90px;
+            line-height: 60px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+        }
+
+        .divider {
+            width: 64px;
+            height: 2px;
+            background: var(--color-accent);
+        }
+
+        .pain-point-text {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .pain-point p {
+            font-size: 17.90px;
+            line-height: 28px;
+            color: var(--color-text-gray);
+            text-align: center;
+        }
+
+        .pain-point .highlight {
+            color: var(--color-text-dark);
+            font-size: 17.90px;
+            line-height: 28px;
+            font-weight: 500;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 128px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            line-height: 48px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+        }
+
+        .section-header p {
+            font-size: 17.70px;
+            line-height: 28px;
+            color: var(--color-text-gray);
+            max-width: 672px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+
+        .benefit-card {
+            background: var(--color-bg);
+            border-radius: 24px;
+            padding: 32px;
+            height: 236px;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--color-accent-light);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .benefit-icon svg {
+            width: 25px;
+            height: 24px;
+            fill: var(--color-accent);
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            font-size: 15.90px;
+            line-height: 26px;
+            color: var(--color-text-gray);
+        }
+
+        .help-box {
+            background: linear-gradient(176deg, #F5EDE4 0%, #F9F3EE 100%);
+            border-radius: 24px;
+            padding: 56px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .help-box h3 {
+            font-size: 30px;
+            line-height: 36px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+            text-align: center;
+        }
+
+        .help-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .help-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--color-accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .help-item span {
+            font-size: 18px;
+            line-height: 28px;
+            color: var(--color-text-light);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 128px 0;
+            background: var(--color-bg);
+        }
+
+        .process-container {
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+            margin-top: 80px;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .process-step:nth-child(even) .process-image {
+            order: 2;
+        }
+
+        .process-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 556/384;
+        }
+
+        .process-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .process-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .process-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .process-number {
+            font-size: 72px;
+            line-height: 72px;
+            color: rgba(201, 168, 130, 0.20);
+            font-weight: 400;
+        }
+
+        .process-content h3 {
+            font-size: 36px;
+            line-height: 40px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+        }
+
+        .process-content .subtitle {
+            font-size: 20px;
+            line-height: 28px;
+            color: var(--color-text-light);
+            font-weight: 500;
+        }
+
+        .process-content p {
+            font-size: 15.90px;
+            line-height: 26px;
+            color: var(--color-text-gray);
+        }
+
+        /* Wellness Foundations */
+        .foundations {
+            padding: 128px 0;
+            background: white;
+        }
+
+        .foundation-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .foundation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .foundation-item:nth-child(even) .foundation-image {
+            order: 2;
+        }
+
+        .foundation-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 552/384;
+        }
+
+        .foundation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .foundation-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .foundation-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tag {
+            display: inline-flex;
+            padding: 9px 16px 7px;
+            background: var(--color-accent-light);
+            border-radius: 9999px;
+            color: var(--color-accent);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            width: fit-content;
+        }
+
+        .foundation-content h3 {
+            font-size: 36px;
+            line-height: 40px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+        }
+
+        .foundation-content > p {
+            font-size: 15.80px;
+            line-height: 26px;
+            color: var(--color-text-gray);
+            padding-top: 4px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 8px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bullet {
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 9999px;
+        }
+
+        .feature-item span {
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--color-text-light);
+        }
+
+        .foundations-footer {
+            text-align: center;
+            margin-top: 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .foundations-footer p {
+            font-size: 17.70px;
+            line-height: 28px;
+            color: var(--color-text-gray);
+            max-width: 768px;
+        }
+
+        /* Founder Section */
+        .founder {
+            padding: 128px 0;
+            background: white;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 488px 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .founder-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 488/500;
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .founder-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .founder-content h2 {
+            font-size: 48px;
+            line-height: 48px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+        }
+
+        .founder-content > p {
+            font-size: 16px;
+            line-height: 26px;
+            color: var(--color-text-gray);
+        }
+
+        .pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 16px;
+        }
+
+        .pillar {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .pillar-bullet {
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 9999px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .pillar-content h4 {
+            font-size: 15.60px;
+            line-height: 26px;
+            color: var(--color-text-dark);
+            font-weight: 700;
+        }
+
+        .pillar-content p {
+            font-size: 15.60px;
+            line-height: 26px;
+            color: var(--color-text-gray);
+        }
+
+        .founder-closing {
+            font-size: 15.90px;
+            line-height: 26px;
+            color: var(--color-text-dark);
+            font-weight: 500;
+            padding-top: 16px;
+        }
+
+        /* Community Section */
+        .community {
+            padding: 128px 0;
+            background: linear-gradient(168deg, #F5EDE4 0%, #FAF8F5 50%, #F9F3EE 100%);
+            overflow: hidden;
+        }
+
+        .community-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .community-header h2 {
+            font-size: 59.40px;
+            line-height: 60px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+            margin-bottom: 32px;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .community-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+            height: 100%;
+            transition: all 0.3s;
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .community-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-accent-light);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .community-icon svg {
+            width: 31.27px;
+            height: 31px;
+            fill: var(--color-accent);
+        }
+
+        .community-card h3 {
+            font-size: 17.90px;
+            line-height: 28px;
+            color: var(--color-text-dark);
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .community-card p {
+            font-size: 13.80px;
+            line-height: 22.75px;
+            color: var(--color-text-gray);
+        }
+
+        .community-cta {
+            text-align: center;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            padding: 128px 0;
+            background: white;
+        }
+
+        .quote-content {
+            max-width: 896px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .quote-content h2 {
+            font-size: 59.50px;
+            line-height: 60px;
+            font-weight: 400;
+            color: var(--color-text-dark);
+        }
+
+        .quote-content > p {
+            font-size: 19.80px;
+            line-height: 28px;
+            color: var(--color-text-gray);
+            max-width: 672px;
+        }
+
+        .quote-buttons {
+            display: flex;
+            gap: 16px;
+            padding-top: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: #F5EDE4;
+            padding: 64px 0 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 556px 258px 258px;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 15.25px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo img {
+            width: 69px;
+            height: 69px;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+
+        .footer-logo span {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 27px;
+            color: var(--color-accent);
+            font-weight: 400;
+        }
+
+        .footer-brand p {
+            font-size: 13.90px;
+            line-height: 22.75px;
+            color: var(--color-text-gray);
+            max-width: 384px;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            line-height: 24px;
+            color: var(--color-text-dark);
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--color-text-gray);
+            text-decoration: none;
+            padding: 3px 0 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .social-icon:hover svg {
+            fill: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(209, 213, 219, 0.5);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p, .footer-bottom a {
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--color-text-gray);
+            text-decoration: none;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-legal a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+        }
+
+        .chat-button {
+            padding: 12px 16px;
+            background: black;
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .chat-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-icon {
+            width: 28px;
+            height: 28px;
+            background: #C9A882;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 72px;
+                line-height: 72px;
+            }
+            
+            .pain-point h2,
+            .quote-content h2,
+            .community-header h2 {
+                font-size: 48px;
+                line-height: 48px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 968px) {
+            nav {
+                padding: 20px 40px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content {
+                padding: 0 40px;
+            }
+            
+            .hero h1 {
+                font-size: 56px;
+                line-height: 56px;
+            }
+            
+            .benefits-grid,
+            .process-step,
+            .foundation-item,
+            .founder-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step:nth-child(even) .process-image,
+            .foundation-item:nth-child(even) .foundation-image {
+                order: -1;
+            }
+            
+            .community-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 40px;
+                line-height: 44px;
+            }
+            
+            .hero-buttons,
+            .quote-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .community-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pain-point h2,
+            .quote-content h2,
+            .community-header h2 {
+                font-size: 32px;
+                line-height: 36px;
+            }
+        }
+
+        /* Parallax */
+        .parallax {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <!-- Replace with your actual logo image URL -->
+            <img src="beyond skin elements/beyond skin circular logo.png" alt="Beyond Skin Logo">
+            <span>BEYOND SKIN</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#approach">Our Approach</a></li>
+            <li><a href="#community">Community</a></li>
+        </ul>
+        <a href="#join" class="nav-cta">Join Now</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg parallax"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="reveal">Redefining Beauty<br>Through Wellness</h1>
+                <p class="hero-subtitle reveal reveal-delay-1">A wellness-first approach to skin confidence, weight balance, and feeling like yourself again.</p>
+            </div>
+            <div class="hero-buttons reveal reveal-delay-2">
+                <a href="#community" class="btn btn-white">Join the Community</a>
+                <a href="#approach" class="btn btn-outline">Explore Wellness Guidance</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Pain Point Section -->
+    <section class="pain-point" id="about">
+        <div class="container">
+            <div class="pain-point-content">
+                <h2 class="reveal">You've tried the products.<br>You've followed the routines.<br>And somehow, you still feel stuck.</h2>
+                <div class="divider reveal"></div>
+                <div class="pain-point-text reveal reveal-delay-1">
+                    <p>It's not your fault. The beauty industry has taught us to look for answers in bottles and jars, when the real transformation happens from within.</p>
+                    <p>Your skin, your weight, your confidence—they're all reflections of internal balance. Stress, nutrition, habits, and lifestyle are the real drivers of how you look and feel.</p>
+                    <p class="highlight">You don't need more products. You need clarity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BeyondSkin Difference -->
+    <section class="benefits" id="approach">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">The BeyondSkin Difference</h2>
+                <div class="divider reveal"></div>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>No unrealistic plans</h3>
+                    <p>We believe in sustainable change that fits your real life, not extreme transformations that fade away.</p>
+                </div>
+                
+                <div class="benefit-card reveal reveal-delay-1">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>No rigid restrictions</h3>
+                    <p>Gentle guidance that works with your body, not against it. No guilt, no shame, just understanding.</p>
+                </div>
+                
+                <div class="benefit-card reveal reveal-delay-2">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3>No confusion</h3>
+                    <p>Clear, intelligent guidance that helps you understand what your body actually needs.</p>
+                </div>
+                
+                <div class="benefit-card reveal reveal-delay-3">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3>Just clear, realistic guidance</h3>
+                    <p>Simple plans backed by science and designed for real women living real lives.</p>
+                </div>
+            </div>
+
+            <div class="help-box reveal">
+                <h3>BeyondSkin helps you:</h3>
+                <div class="help-list">
+                    <div class="help-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Understand what to change, stop, and keep</span>
+                    </div>
+                    <div class="help-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Identify habits and patterns holding you back</span>
+                    </div>
+                    <div class="help-item">
+                        <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Apply simple plans that fit a real life</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">How It Works</h2>
+                <div class="divider reveal"></div>
+                <p class="reveal reveal-delay-1">A simple, three-step approach to lasting transformation</p>
+            </div>
+
+            <div class="process-container">
+                <div class="process-step reveal">
+                    <div class="process-image">
+                        <!-- Replace with your Learn.png -->
+                        <img src="beyond skin elements/Learn.png" alt="Learn">
+                    </div>
+                    <div class="process-content">
+                        <div class="process-number">01</div>
+                        <h3>Learn</h3>
+                        <p class="subtitle">Understand what your body actually needs</p>
+                        <p>Discover the connection between your habits, lifestyle, and how you look and feel. No more guessing.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-image">
+                        <!-- Replace with your Reset.png -->
+                        <img src="beyond skin elements/Reset.png" alt="Reset">
+                    </div>
+                    <div class="process-content">
+                        <div class="process-number">02</div>
+                        <h3>Reset</h3>
+                        <p class="subtitle">Remove what's blocking progress</p>
+                        <p>Gently identify and shift the patterns that have been holding you back. Simple, sustainable changes.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal">
+                    <div class="process-image">
+                        <!-- Replace with your Glow.png -->
+                        <img src="beyond skin elements/Glow.png" alt="Glow">
+                    </div>
+                    <div class="process-content">
+                        <div class="process-number">03</div>
+                        <h3>Glow</h3>
+                        <p class="subtitle">Build habits and Routine that support skin, weight, and confidence</p>
+                        <p>Create a sustainable routine that works with your life. Real results that last<br>Recommendation on products for skin problems.<br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wellness Foundations -->
+    <section class="foundations">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Wellness Foundations</h2>
+                <div class="divider reveal"></div>
+                <p class="reveal reveal-delay-1">Simple, sustainable practices that support your body from the inside out</p>
+            </div>
+
+            <div class="foundation-item reveal">
+                <div class="foundation-image">
+                    <!-- Replace with your Move With Purpose.png -->
+                    <img src="beyond skin elements/Move With Purpose.png" alt="Move With Purpose">
+                </div>
+                <div class="foundation-content">
+                    <span class="tag">Exercise that energizes</span>
+                    <h3>Move With Purpose</h3>
+                    <p>Gentle movement that reduces stress, improves circulation, and supports hormonal balance. From yoga to strength training—find what makes you feel alive.</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Stress-reducing movement</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Improved circulation</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Hormonal harmony</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="foundation-item reveal">
+                <div class="foundation-image">
+                    <!-- Replace with your Nourish Your Body.png -->
+                    <img src="beyond skin elements/Nourish Your Body.png" alt="Nourish Your Body">
+                </div>
+                <div class="foundation-content">
+                    <span class="tag">Eating for radiance</span>
+                    <h3>Nourish Your Body</h3>
+                    <p>Discover how whole foods, balanced nutrition, and mindful eating patterns support glowing skin and sustained energy. No restrictive diets—just real food that works with your body.</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Anti-inflammatory foods</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Gut health support</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Blood sugar balance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="foundation-item reveal">
+                <div class="foundation-image">
+                    <!-- Replace with your Cardio for Clarity.png -->
+                    <img src="beyond skin elements/Cardio for Clarity.png" alt="Cardio for Clarity">
+                </div>
+                <div class="foundation-content">
+                    <span class="tag">Heart health meets mental wellness</span>
+                    <h3>Cardio for Clarity</h3>
+                    <p>Light cardio that boosts mood, enhances skin glow through better circulation, and supports weight balance—without burnout or exhaustion.</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Enhanced circulation</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Natural mood boost</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="bullet"></div>
+                            <span>Sustainable energy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="foundations-footer reveal">
+                <p>These aren't rigid rules—they're gentle guidelines that work with your life, not against it.</p>
+                <a href="#" class="btn btn-accent">Start Your Wellness Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder">
+        <div class="container">
+            <div class="founder-grid reveal">
+                <div class="founder-image">
+                    <!-- Replace with your Founder.png -->
+                    <img src="beyond skin elements/Founder.png" alt="Founder">
+                </div>
+                <div class="founder-content">
+                    <h2>Founder-Led Trust</h2>
+                    <div class="divider"></div>
+                    <p>BeyondSkin is founder-led and expert-supported. Every piece of guidance, every recommendation, every insight comes from a place of genuine care and deep understanding.</p>
+                    <p>We're built on three pillars:</p>
+                    <div class="pillars">
+                        <div class="pillar">
+                            <div class="pillar-bullet"></div>
+                            <div class="pillar-content">
+                                <h4>Education</h4>
+                                <p>Understanding your body is the first step to transformation</p>
+                            </div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-bullet"></div>
+                            <div class="pillar-content">
+                                <h4>Clarity</h4>
+                                <p>No confusion, no overwhelm—just clear, actionable guidance</p>
+                            </div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-bullet"></div>
+                            <div class="pillar-content">
+                                <h4>Real-life sustainability</h4>
+                                <p>Plans that work with your life, not against it</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="founder-closing">No dependency. No fear-based marketing. Just empowerment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <div class="container">
+            <div class="community-header">
+                <h2 class="reveal">A space for women ready to<br>stop guessing, start understanding,<br>and feel confident in their bodies again.</h2>
+                <div class="divider reveal"></div>
+            </div>
+
+            <div class="community-grid">
+                <div class="community-card reveal">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3>Support</h3>
+                    <p>Connect with women on the same journey</p>
+                </div>
+
+                <div class="community-card reveal reveal-delay-1">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3>Shared journeys</h3>
+                    <p>Learn from real experiences and transformations</p>
+                </div>
+
+                <div class="community-card reveal reveal-delay-2">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3>Accountability</h3>
+                    <p>Stay motivated with gentle encouragement</p>
+                </div>
+
+                <div class="community-card reveal reveal-delay-3">
+                    <div class="community-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3>Safe space</h3>
+                    <p>A judgment-free zone for growth and healing</p>
+                </div>
+            </div>
+
+            <div class="community-cta reveal">
+                <a href="#" class="btn btn-accent">Join the BeyondSkin Community</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section" id="join">
+        <div class="container">
+            <div class="quote-content">
+                <h2 class="reveal">Your glow doesn't come<br>from a bottle.<br>It comes from balance.</h2>
+                <div class="divider reveal"></div>
+                <p class="reveal reveal-delay-1">Join thousands of women who've discovered that real transformation begins with understanding, not products. Your journey to confidence starts here.</p>
+                <div class="quote-buttons reveal reveal-delay-2">
+                    <a href="#" class="btn btn-accent">Join the Community</a>
+                    <a href="#" class="btn btn-outline-accent">Explore Wellness Guidance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <!-- Replace with your logo -->
+                        <img src="beyond skin elements/beyond skin circular logo.png" alt="Logo">
+                        <span>BEYOND SKIN</span>
+                    </div>
+                    <p>Redefining beauty through wellness. A holistic approach to skin confidence, weight balance, and feeling like yourself again.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#">About Us</a>
+                        <a href="#">Our Approach</a>
+                        <a href="#">Community</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p style="margin-top: 8px; font-size: 16px;">@thebeyondskin</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 BeyondSkin. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Website Builder</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-button">
+            <div class="chat-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                </svg>
+            </div>
+            <span>Speak with a Consultant</span>
+        </button>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.parallax');
+            if (parallax && scrolled < window.innerHeight) {
+                parallax.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Chat widget interaction
+        document.querySelector('.chat-button').addEventListener('click', () => {
+            alert('Chat feature coming soon! Email us at hello@beyondskin.com');
+        });
+    </script>
+</body>
+</html>
